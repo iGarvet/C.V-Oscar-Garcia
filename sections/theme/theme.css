@@ -1,0 +1,28 @@
+/* ═══════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════ */
+.theme-toggle {
+  position: fixed;
+  top: 20px; right: 20px;
+  z-index: 300;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--pill-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-green);
+  font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.22s, box-shadow 0.22s;
+}
+.theme-toggle:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 16px var(--green-glow-s);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE < 920px — THEME
+═══════════════════════════════════════ */
+@media (max-width: 920px) {
+  .theme-toggle { top: 12px; right: 12px; width: 40px; height: 40px; }
+}

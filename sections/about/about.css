@@ -1,0 +1,14 @@
+/* ═══════════════════════════════════════
+   ABOUT PANEL
+═══════════════════════════════════════ */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.about-card { padding: 22px; }
+.about-card.full { grid-column: span 2; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE < 920px — ABOUT
+═══════════════════════════════════════ */
+@media (max-width: 920px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-card.full { grid-column: span 1; }
+}

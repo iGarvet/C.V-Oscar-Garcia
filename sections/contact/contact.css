@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════
+   CONTACT PANEL
+═══════════════════════════════════════ */
+.contact-layout { display: grid; grid-template-columns: 1fr 1.45fr; gap: 14px; align-items: start; }
+.contact-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.contact-ic {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: rgba(76,175,80,0.09);
+  border: 1px solid rgba(76,175,80,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.88rem; flex-shrink: 0;
+}
+.contact-txt { font-size: 0.79rem; color: var(--text-secondary); }
+.form-sep { height: 1px; background: var(--border); margin: 15px 0; }
+.form-group { margin-bottom: 13px; }
+.form-label {
+  display: block; font-size: 0.70rem; color: var(--text-muted);
+  font-family: var(--font-c); text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 5px;
+}
+.form-input, .form-textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 13px;
+  color: var(--text-primary);
+  font-family: var(--font-b); font-size: 0.81rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+.form-input:focus, .form-textarea:focus { border-color: rgba(76,175,80,0.52); }
+.form-textarea { resize: vertical; min-height: 88px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.wa-btn {
+  width: 100%; padding: 12px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff; border-radius: var(--r-pill);
+  font-family: var(--font-d); font-size: 0.84rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: transform 0.22s, box-shadow 0.22s;
+  box-shadow: 0 4px 18px rgba(37,211,102,0.3);
+}
+.wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(37,211,102,0.42); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE < 920px — CONTACT
+═══════════════════════════════════════ */
+@media (max-width: 920px) {
+  .contact-layout { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}

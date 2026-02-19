@@ -1,0 +1,9 @@
+@import '../sections/base/base.css';
+@import '../sections/sidebar/sidebar.css';
+@import '../sections/nav/nav.css';
+@import '../sections/theme/theme.css';
+@import '../sections/home/home.css';
+@import '../sections/about/about.css';
+@import '../sections/skills/skills.css';
+@import '../sections/portfolio/portfolio.css';
+@import '../sections/contact/contact.css';

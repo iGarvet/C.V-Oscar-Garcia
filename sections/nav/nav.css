@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════
+   NAV PILLS — VERTICAL RIGHT
+═══════════════════════════════════════ */
+.nav-pills {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 200;
+}
+.nav-pill {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-pill);
+  background: var(--pill-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(76, 175, 80, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition:
+    transform 0.22s,
+    box-shadow 0.22s,
+    border-color 0.22s;
+  position: relative;
+}
+.nav-pill:hover {
+  transform: scale(1.16);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.38);
+  border-color: rgba(76, 175, 80, 0.42);
+}
+.nav-pill.active {
+  border-color: rgba(76, 175, 80, 0.62);
+  box-shadow: 0 0 24px rgba(76, 175, 80, 0.28);
+}
+.nav-pill.active::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  width: 3px;
+  height: 22px;
+  background: var(--green);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--green);
+}
+/* Tooltip */
+.nav-pill::after {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10, 12, 10, 0.92);
+  color: var(--green);
+  font-family: var(--font-b);
+  font-size: 0.71rem;
+  padding: 5px 11px;
+  border-radius: 7px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+.nav-pill:hover::after {
+  opacity: 1;
+}
+[data-theme="light"] .nav-pill::after {
+  background: #ffffff;
+  border-color: var(--green);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE < 920px — NAV
+═══════════════════════════════════════ */
+@media (max-width: 920px) {
+  .nav-pills {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 16px;
+    top: auto;
+    flex-direction: row;
+    gap: 6px;
+    background: rgba(10, 12, 10, 0.86);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border-green);
+    border-radius: var(--r-pill);
+    padding: 8px 14px;
+  }
+  [data-theme="light"] .nav-pills {
+    background: #EFF6EF;
+    border-color: var(--green);
+  }
+  .nav-pill.active::before {
+    display: none;
+  }
+  .nav-pill::after {
+    display: none;
+  }
+}

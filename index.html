@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oscar Garcia Acevedo — Front-end Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Exo+2:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+
+  <!-- ORBS ATMOSFÉRICOS -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- CURSOR GLOW -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- TOGGLE TEMA -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><i class="fa-solid fa-moon"></i></button>
+
+  <!-- NAV PILLS VERTICALES -->
+  <nav class="nav-pills" id="navPills">
+    <div class="nav-pill active" data-panel="home" data-label="Inicio" role="button" tabindex="0"><i
+        class="fa-solid fa-house"></i></div>
+    <div class="nav-pill" data-panel="about" data-label="Sobre mí" role="button" tabindex="0"><i
+        class="fa-solid fa-user"></i></div>
+    <div class="nav-pill" data-panel="skills" data-label="Habilidades" role="button" tabindex="0"><i
+        class="fa-solid fa-bolt"></i></div>
+    <div class="nav-pill" data-panel="portfolio" data-label="Portafolio" role="button" tabindex="0"><i
+        class="fa-solid fa-images"></i></div>
+    <div class="nav-pill" data-panel="contact" data-label="Contacto" role="button" tabindex="0"><i
+        class="fa-solid fa-envelope"></i></div>
+  </nav>
+
+  <!-- ╔══════════════════════════════════════════╗
+       ║              CÁPSULA PRINCIPAL           ║
+       ╚══════════════════════════════════════════╝ -->
+  <div class="capsule" id="capsule">
+
+    <!-- ══════════════ SIDEBAR ══════════════ -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Foto con anillo giratorio -->
+      <div class="photo-wrap">
+        <div class="photo-outer">
+          <div class="photo-inner" id="photoInner">
+            <img src="assets/img/Oscar-garcia.jpeg" alt="Oscar Garcia Acevedo" />
+          </div>
+        </div>
+        <div class="badge-avail">
+          <div class="badge-dot"></div>
+          Disponible
+        </div>
+      </div>
+
+      <p class="sb-name">Oscar Garcia Acevedo</p>
+      <p class="sb-role">Ing. en Software · Front-end</p>
+      <p class="sb-desc">Perfeccionista obsesionado con la calidad. Creo experiencias front-end fluidas y premium.
+      </p>
+
+      <!-- Pills de info -->
+      <div class="info-pills">
+        <div class="info-pill"><span class="info-pill-ic"><i class="fa-solid fa-cake-candles"></i></span><span>24
+            años</span></div>
+        <div class="info-pill"><span class="info-pill-ic"><i class="fa-solid fa-location-dot"></i></span><span>Puebla,
+            México</span></div>
+        <div class="info-pill"><span class="info-pill-ic"><i class="fa-solid fa-briefcase"></i></span><span>Freelance
+          </span></div>
+      </div>
+
+      <!-- Redes sociales — íconos cuadrados -->
+      <div class="social-row">
+        <!-- PLACEHOLDER: reemplaza href="#" con tu URL de GitHub -->
+        <a href="#" class="social-icon" target="_blank" rel="noopener" title="GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z" />
+          </svg>
+        </a>
+        <!-- PLACEHOLDER: reemplaza href="#" con tu URL de LinkedIn -->
+        <a href="#" class="social-icon" target="_blank" rel="noopener" title="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+          </svg>
+        </a>
+        <!-- PLACEHOLDER: reemplaza href="mailto:#" con tu email -->
+        <a href="mailto:#" class="social-icon" title="Email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>
+        </a>
+        <!-- PLACEHOLDER: reemplaza href="#" con tu URL de Twitter/X -->
+        <a href="#" class="social-icon" target="_blank" rel="noopener" title="Twitter / X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="sb-sep"></div>
+
+      <!-- PLACEHOLDER: reemplaza href="#" con la ruta de tu CV PDF, p.ej. href="assets/cv-oscar.pdf" -->
+      <a href="#" class="cv-btn" target="_blank" rel="noopener" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7z" />
+        </svg>
+        Descargar CV
+      </a>
+
+      <p class="sb-footer" id="sbFooter"></p>
+
+    </aside>
+
+    <!-- ══════════════ SEPARADOR VERTICAL ══════════════ -->
+    <div class="v-sep">
+      <div class="v-sep-dot"></div>
+    </div>
+
+    <!-- ══════════════ ÁREA DE CONTENIDO ══════════════ -->
+    <div class="content-area">
+
+      <!-- ─────────────── PANEL: HOME ─────────────── -->
+      <section class="panel active" id="home">
+        <p class="home-greeting">Hola, soy Oscar <i class="fa-solid fa-hand"></i></p>
+        <h1 class="home-title">
+          Construyo<br>
+          <span class="outline">interfaces</span><br>
+          <span class="accent"><span id="typingTarget">premium.</span><span id="typingCursor"></span></span>
+        </h1>
+        <p class="home-para">
+          Ingeniero Front-end especializado en diseño y experiencia de usuario.
+          Transformo ideas en productos digitales que combinan estética premium, interacción fluida y código limpio,
+          modular y escalable.
+        </p>
+        <div class="home-cta">
+          <a href="#" class="btn-primary" onclick="switchPanel('portfolio'); return false;">Ver mi trabajo →</a>
+          <a href="#" class="btn-outline" onclick="switchPanel('contact');   return false;">Hablemos <i
+              class="fa-solid fa-comments"></i></a>
+        </div>
+        <div class="home-stats">
+          <div class="stat-item"><strong>3+</strong><span>Años de<br>experiencia</span></div>
+          <div class="stat-item"><strong>10+</strong><span>Proyectos<br>completados</span></div>
+          <div class="stat-item"><strong>100%</strong><span>Calidad<br>obsesiva</span></div>
+          <div class="stat-item"><strong>∞</strong><span>Detalle en<br>cada pixel</span></div>
+        </div>
+      </section>
+
+      <!-- ─────────────── PANEL: SOBRE MÍ ─────────────── -->
+      <section class="panel" id="about">
+        <p class="sec-tag">Mi historia</p>
+        <h2 class="sec-title">Sobre <span>mí</span></h2>
+        <p class="sec-sub">Me dedico a crear experiencias web de alto nivel: interfaces intuitivas, visualmente
+          impactantes y optimizadas para rendimiento.
+          Enfocado en detalle pixel-perfect, animaciones fluidas y código limpio, modular y escalable.
+          Transformo ideas en productos digitales premium que superan expectativas en calidad y experiencia de usuario
+        </p>
+
+        <div class="about-grid">
+
+          <div class="glass-card about-card">
+            <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <p class="card-title">Formación académica</p>
+            <p class="exp-period">2019 — 2024</p>
+            <p class="exp-role">Ing. en Desarrollo y Gestión de Software</p>
+            <p class="exp-company">Instituto Tecnológico Universitario (ITU) · DASC</p>
+            <p class="card-text">Formación integral con énfasis en arquitectura web, bases de datos, metodologías ágiles
+              y diseño de sistemas. Titulación con calificación sobresaliente.</p>
+          </div>
+
+          <div class="glass-card about-card">
+            <div class="card-icon"><i class="fa-solid fa-laptop"></i></div>
+            <p class="card-title">Experiencia profesional</p>
+            <p class="exp-period">Actual · DIF Puebla</p>
+            <p class="exp-role">Desarrollador de Software</p>
+            <p class="exp-company">C# · ASP.NET Core MVC · SQL Server</p>
+            <p class="exp-period">Anterior · CES-RH</p>
+            <p class="exp-role">Desarrollador Web</p>
+            <p class="exp-company">Laravel · PHP · MySQL · Bootstrap</p>
+          </div>
+
+          <div class="glass-card about-card full">
+            <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
+            <p class="card-title">Freelance &amp; Proyectos personales</p>
+            <p class="card-text" style="margin-bottom:14px;">
+              Diseño y desarrollo <strong>landing pages</strong>, <strong>sistemas web completos</strong>
+              y <strong>experiencias interactivas</strong> para clientes y proyectos personales.
+            </p>
+            <div class="tech-badges">
+              <span class="tech-badge">HTML5</span>
+              <span class="tech-badge">CSS3</span>
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">Vue.js</span>
+              <span class="tech-badge">GSAP</span>
+              <span class="tech-badge">Tailwind CSS</span>
+              <span class="tech-badge">Bootstrap</span>
+              <span class="tech-badge">Glassmorphism</span>
+              <span class="tech-badge">Animaciones CSS</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ─────────────── PANEL: HABILIDADES ─────────────── -->
+      <section class="panel" id="skills">
+        <p class="sec-tag">Lo que domino</p>
+        <h2 class="sec-title">Habilidades <span>técnicas</span></h2>
+        <p class="sec-sub">Front-end como filosofía. Cada tecnología que aprendo la convierto en herramienta para
+          construir experiencias de alto impacto.</p>
+
+        <div class="skills-grid">
+
+          <div class="glass-card" style="padding:26px;">
+            <p class="card-title" style="margin-bottom:18px;">Nivel de dominio</p>
+            <div class="skill-item" data-skill="80">
+              <div class="skill-header"><span class="skill-name"><i class="fa-solid fa-palette"></i> Diseño
+                  Web</span><span class="skill-pct">80%</span></div>
+              <div class="skill-bar-bg">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-item" data-skill="95">
+              <div class="skill-header"><span class="skill-name"><i class="fa-solid fa-code"></i> HTML / CSS</span><span
+                  class="skill-pct">95%</span></div>
+              <div class="skill-bar-bg">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-item" data-skill="90">
+              <div class="skill-header"><span class="skill-name"><i class="fa-solid fa-gear"></i> JavaScript</span><span
+                  class="skill-pct">90%</span></div>
+              <div class="skill-bar-bg">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-item" data-skill="85">
+              <div class="skill-header"><span class="skill-name"><i class="fa-brands fa-vuejs"></i> Vue.js</span><span
+                  class="skill-pct">85%</span></div>
+              <div class="skill-bar-bg">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-item" data-skill="80">
+              <div class="skill-header"><span class="skill-name"><i class="fa-solid fa-wand-magic-sparkles"></i>
+                  GSAP</span><span class="skill-pct">80%</span></div>
+              <div class="skill-bar-bg">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+            <div class="skill-item" data-skill="92">
+              <div class="skill-header"><span class="skill-name"><i class="fa-solid fa-bullseye"></i> Tailwind /
+                  Bootstrap</span><span class="skill-pct">92%</span></div>
+              <div class="skill-bar-bg">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card" style="padding:26px;">
+            <p class="card-title" style="margin-bottom:18px;">Stack completo</p>
+            <div class="stack-group">
+              <p class="stack-lbl">Frontend</p>
+              <div class="tech-badges">
+                <span class="tech-badge">Vue 3</span>
+                <span class="tech-badge">Vite</span>
+                <span class="tech-badge">GSAP</span>
+                <span class="tech-badge">Tailwind</span>
+                <span class="tech-badge">Bootstrap</span>
+                <span class="tech-badge">CSS Grid</span>
+                <span class="tech-badge">Flexbox</span>
+                <span class="tech-badge">Sass</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <p class="stack-lbl">Backend &amp; Tools</p>
+              <div class="tech-badges">
+                <span class="tech-badge">C# / ASP.NET</span>
+                <span class="tech-badge">Laravel</span>
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">SQL Server</span>
+                <span class="tech-badge">MySQL</span>
+                <span class="tech-badge">Git</span>
+                <span class="tech-badge">GitHub</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <p class="stack-lbl">Diseño &amp; UX</p>
+              <div class="tech-badges">
+                <span class="tech-badge">Figma</span>
+                <span class="tech-badge">Glassmorphism</span>
+                <span class="tech-badge">Animaciones</span>
+                <span class="tech-badge">Responsive</span>
+                <span class="tech-badge">Mobile First</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ─────────────── PANEL: PORTAFOLIO ─────────────── -->
+      <section class="panel" id="portfolio">
+        <p class="sec-tag">Mi trabajo</p>
+        <h2 class="sec-title">Porta<span>folio</span></h2>
+        <p class="sec-sub">Proyectos donde cada píxel tiene intención. Desde landings de alto impacto hasta sistemas web
+          completos.</p>
+
+        <div class="portfolio-grid">
+
+          <div class="project-card">
+            <div class="project-img">
+              <!-- PLACEHOLDER: descomenta y edita → <img src="assets/project1.jpg" alt="Proyecto 1" /> -->
+              <div class="project-img-ph"><span><i class="fa-solid fa-globe"></i></span><span>Imagen del proyecto</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Landing Premium — Proyecto 1</h3>
+              <p class="project-desc">Landing page con animaciones GSAP, glassmorphism y diseño mobile-first. Conversión
+                optimizada y carga ultrarrápida.</p>
+              <div class="project-tags">
+                <span class="project-tag">HTML</span>
+                <span class="project-tag">CSS</span>
+                <span class="project-tag">GSAP</span>
+                <span class="project-tag">Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img">
+              <!-- PLACEHOLDER: descomenta y edita → <img src="assets/project2.jpg" alt="Proyecto 2" /> -->
+              <div class="project-img-ph"><span><i class="fa-solid fa-screwdriver-wrench"></i></span><span>Imagen del
+                  proyecto</span></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Sistema Web — Proyecto 2</h3>
+              <p class="project-desc">App web con Vue.js, gestión de datos en tiempo real e interfaz glassmorphism
+                fluida.</p>
+              <div class="project-tags">
+                <span class="project-tag">Vue.js</span>
+                <span class="project-tag">Tailwind</span>
+                <span class="project-tag">JavaScript</span>
+                <span class="project-tag">API REST</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img">
+              <!-- PLACEHOLDER: descomenta y edita → <img src="assets/project3.jpg" alt="Proyecto 3" /> -->
+              <div class="project-img-ph"><span><i class="fa-solid fa-building"></i></span><span>Imagen del
+                  proyecto</span></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Landing Corporativa — Proyecto 3</h3>
+              <p class="project-desc">Sitio corporativo con identidad sólida, secciones animadas y formulario de
+                contacto optimizado.</p>
+              <div class="project-tags">
+                <span class="project-tag">HTML</span>
+                <span class="project-tag">CSS</span>
+                <span class="project-tag">Bootstrap</span>
+                <span class="project-tag">JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ─────────────── PANEL: CONTACTO ─────────────── -->
+      <section class="panel" id="contact">
+        <p class="sec-tag">Hablemos</p>
+        <h2 class="sec-title">Con<span>tacto</span></h2>
+        <p class="sec-sub">¿Tienes un proyecto en mente? Cuéntame, construyamos algo increíble juntos.</p>
+
+        <div class="contact-layout">
+
+          <div class="glass-card" style="padding:22px;">
+            <p class="card-title" style="margin-bottom:14px;">¿Listo para empezar?</p>
+            <p style="font-size:0.76rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
+              Respondo en menos de 24 horas. Prefiero WhatsApp para comunicación rápida.
+            </p>
+            <div class="contact-row">
+              <div class="contact-ic"><i class="fa-solid fa-mobile-screen-button"></i></div>
+              <span class="contact-txt">+52 222 879 8843</span>
+            </div>
+            <div class="contact-row">
+              <div class="contact-ic"><i class="fa-solid fa-location-dot"></i></div>
+              <span class="contact-txt">Puebla, Puebla, México</span>
+            </div>
+            <div class="contact-row">
+              <div class="contact-ic"><i class="fa-solid fa-clock"></i></div>
+              <span class="contact-txt">Lun–Vie, 9am–8pm CST</span>
+            </div>
+            <div class="form-sep"></div>
+            <p
+              style="font-size:0.67rem;color:var(--text-muted);font-family:var(--font-c);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">
+              Sígueme</p>
+            <!-- PLACEHOLDER: reemplaza "#" con tus enlaces reales -->
+            <div class="social-row">
+              <a href="#" class="social-icon" target="_blank" title="GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z" />
+                </svg>
+              </a>
+              <a href="#" class="social-icon" target="_blank" title="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="glass-card" style="padding:26px;">
+            <p class="card-title" style="margin-bottom:16px;">Envíame un mensaje</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="inputNombre">Nombre</label>
+                <input class="form-input" id="inputNombre" type="text" placeholder="Tu nombre completo"
+                  autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inputEmail">Email</label>
+                <input class="form-input" id="inputEmail" type="email" placeholder="tu@email.com"
+                  autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inputAsunto">Asunto</label>
+              <input class="form-input" id="inputAsunto" type="text" placeholder="¿De qué trata tu proyecto?" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inputMensaje">Mensaje</label>
+              <textarea class="form-textarea" id="inputMensaje" placeholder="Hablame un poco sobre el..."></textarea>
+            </div>
+            <button class="wa-btn" onclick="enviarWhatsApp()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Enviar por WhatsApp
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- /content-area -->
+
+  </div><!-- /capsule -->
+
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
