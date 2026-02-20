@@ -266,6 +266,7 @@ i.fa-solid, i.fa-regular, i.fa-brands { color: #4caf50; }
     border-radius: 40px;
     height: auto;
     max-width: 100%;
+    will-change: transform;
   }
 
   .v-sep { display: none; }
