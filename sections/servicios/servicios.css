@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════
+   SERVICIOS PANEL
+═══════════════════════════════════════ */
+#servicios .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+#servicios .service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  cursor: pointer;
+}
+
+#servicios .service-card .project-body {
+  flex: 1;
+  padding: 0;
+  margin-bottom: 14px;
+}
+
+#servicios .service-card .project-title {
+  font-family: var(--font-d);
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+#servicios .service-card .project-desc {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.58;
+  margin-bottom: 14px;
+}
+
+.service-features {
+  list-style: none;
+  margin: 0 0 14px 0;
+  padding: 0;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.service-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.service-features li:last-child {
+  margin-bottom: 0;
+}
+
+.service-features li i {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 0.7rem;
+}
+
+.service-features li .fa-circle-check {
+  color: var(--green);
+}
+
+.service-features li .fa-circle-xmark {
+  color: var(--text-muted);
+}
+
+.service-features li .fa-arrows-rotate,
+.service-features li .fa-infinity {
+  color: var(--green-light);
+}
+
+.service-price {
+  font-family: var(--font-d);
+  font-size: 0.82rem;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+
+.service-note {
+  font-family: var(--font-c);
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+#servicios .service-card .project-tags {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+#servicios .home-cta {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#servicios .service-disclaimer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE < 920px — SERVICIOS
+═══════════════════════════════════════ */
+@media (max-width: 920px) {
+  #servicios .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}

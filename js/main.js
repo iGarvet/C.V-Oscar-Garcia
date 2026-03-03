@@ -2,6 +2,120 @@
 const $ = (id) => document.getElementById(id);
 const isMobile = () => window.innerWidth <= 920;
 
+/* ─────────────── PAQUETES SERVICIOS (cotización WhatsApp) ─────────────── */
+const PACKETES = {
+  basico: {
+    nombre: "Paquete Básico",
+    precio: "Desde $6,000 – $8,000 MXN",
+    tiempo: "7-14 días",
+    resumen:
+      "Landing 1-3 secciones, responsive, animaciones básicas, formulario + WhatsApp, 1 ronda de revisiones.",
+  },
+  estandar: {
+    nombre: "Paquete Estándar",
+    precio: "Desde $12,000 – $18,000 MXN",
+    tiempo: "3-5 semanas",
+    resumen:
+      "Sitio multi-sección, animaciones GSAP + ScrollTrigger, WhatsApp/Calendly, SEO básico, diseño pixel-perfect, 2 rondas de revisiones.",
+  },
+  premium: {
+    nombre: "Paquete Premium",
+    precio: "Desde $32,000 – $45,000 MXN en adelante",
+    tiempo: "5-10 semanas o más",
+    resumen:
+      "Landing de alto impacto o sitio con funcionalidades extras, animaciones complejas, optimización LCP/CLS, integraciones (pagos, APIs, CRM), mantenimiento 1 mes, revisiones ilimitadas.",
+  },
+};
+let paqueteSeleccionado = null;
+
+function seleccionarPaqueteYCotizar(key) {
+  paqueteSeleccionado = PACKETES[key] || null;
+  switchPanel("contact");
+  if (typeof updateResumenPaquete === "function") updateResumenPaquete();
+}
+
+function updateResumenPaquete() {
+  const el = $("resumenPaquete");
+  if (!el) return;
+  if (paqueteSeleccionado) {
+    el.innerHTML =
+      `<p class="card-title" style="margin-bottom:8px;"><i class="fa-solid fa-box-open"></i> Cotización: ${paqueteSeleccionado.nombre}</p>` +
+      `<p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px;">${paqueteSeleccionado.precio} · ${paqueteSeleccionado.tiempo}</p>` +
+      `<p style="font-size:0.72rem;color:var(--text-secondary);line-height:1.5;">${paqueteSeleccionado.resumen}</p>` +
+      `<button type="button" class="resumen-paquete-clear" onclick="limpiarPaqueteSeleccionado()" aria-label="Quitar paquete">Quitar paquete</button>`;
+    el.style.display = "block";
+  } else {
+    el.innerHTML = "";
+    el.style.display = "none";
+  }
+}
+
+function limpiarPaqueteSeleccionado() {
+  const contactEl = $("contact");
+  const serviciosEl = $("servicios");
+  if (!contactEl || !serviciosEl) {
+    paqueteSeleccionado = null;
+    updateResumenPaquete();
+    switchPanel("servicios");
+    return;
+  }
+  gsap.to(contactEl, {
+    y: -120,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.in",
+    onComplete() {
+      paqueteSeleccionado = null;
+      updateResumenPaquete();
+      contactEl.classList.remove("active");
+      gsap.set(contactEl, { clearProps: "all" });
+      window.scrollTo(0, 0);
+
+      navPills.forEach((n) => n.classList.remove("active"));
+      document
+        .querySelector('[data-panel="servicios"]')
+        .classList.add("active");
+      current = "servicios";
+
+      const headers = serviciosEl.querySelectorAll(HEADER_SEL);
+      const cards = serviciosEl.querySelectorAll(".glass-card, .project-card");
+      gsap.set(headers, { opacity: 0, y: 18 });
+      gsap.set(cards, { opacity: 0, y: 14 });
+      serviciosEl.classList.add("active");
+      gsap.set(serviciosEl, { opacity: 1, y: 0, scale: 1 });
+
+      const tl = gsap.timeline({
+        onComplete() {
+          if (typeof animateSkills === "function" && current === "skills")
+            animateSkills();
+        },
+      });
+      if (headers.length) {
+        tl.to(headers, {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.08,
+          ease: "power3.out",
+        });
+      }
+      if (cards.length) {
+        tl.to(
+          cards,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.36,
+            stagger: 0.08,
+            ease: "power2.out",
+          },
+          headers.length ? "-=0.15" : 0,
+        );
+      }
+    },
+  });
+}
+
 /* ─────────────── FOOTER AÑO ─────────────── */
 $("sbFooter").textContent =
   `© ${new Date().getFullYear()} Oscar Garcia Acevedo`;
@@ -53,53 +167,70 @@ function initCapsuleOverscroll() {
     return docEl.scrollHeight > window.innerHeight;
   }
 
-  document.addEventListener("touchstart", (e) => {
-    if (e.touches.length !== 1 || !canScroll()) return;
-    touchY0 = e.touches[0].clientY;
-  }, { passive: true });
+  document.addEventListener(
+    "touchstart",
+    (e) => {
+      if (e.touches.length !== 1 || !canScroll()) return;
+      touchY0 = e.touches[0].clientY;
+    },
+    { passive: true },
+  );
 
-  document.addEventListener("touchmove", (e) => {
-    if (e.touches.length !== 1 || !canScroll()) return;
-    const clientY = e.touches[0].clientY;
-    const delta = clientY - touchY0;
-    if (atTop() && delta > 0) {
-      const damped = delta * DAMPING;
-      const excess = Math.max(0, damped - MAX_STRETCH_PX);
-      const y = Math.min(
-        damped <= MAX_STRETCH_PX ? damped : MAX_STRETCH_PX + excess * OVERSTRETCH_FACTOR,
-        MAX_TOTAL_STRETCH_PX
-      );
-      const deform = Math.min(excess * DEFORM_SENSITIVITY, MAX_DEFORM);
-      gsap.set(capsule, {
-        y,
-        scaleY: 1 + deform,
-        transformOrigin: "50% 0%",
-      });
-      e.preventDefault();
-    } else if (atBottom() && delta < 0) {
-      const damped = -delta * DAMPING;
-      const excess = Math.max(0, damped - MAX_STRETCH_PX);
-      const yRaw = damped <= MAX_STRETCH_PX ? damped : MAX_STRETCH_PX + excess * OVERSTRETCH_FACTOR;
-      const y = -Math.min(yRaw, MAX_TOTAL_STRETCH_PX);
-      const deform = Math.min(excess * DEFORM_SENSITIVITY, MAX_DEFORM);
-      gsap.set(capsule, {
-        y,
-        scaleY: 1 + deform,
-        transformOrigin: "50% 100%",
-      });
-      e.preventDefault();
-    }
-  }, { passive: false });
+  document.addEventListener(
+    "touchmove",
+    (e) => {
+      if (e.touches.length !== 1 || !canScroll()) return;
+      const clientY = e.touches[0].clientY;
+      const delta = clientY - touchY0;
+      if (atTop() && delta > 0) {
+        const damped = delta * DAMPING;
+        const excess = Math.max(0, damped - MAX_STRETCH_PX);
+        const y = Math.min(
+          damped <= MAX_STRETCH_PX
+            ? damped
+            : MAX_STRETCH_PX + excess * OVERSTRETCH_FACTOR,
+          MAX_TOTAL_STRETCH_PX,
+        );
+        const deform = Math.min(excess * DEFORM_SENSITIVITY, MAX_DEFORM);
+        gsap.set(capsule, {
+          y,
+          scaleY: 1 + deform,
+          transformOrigin: "50% 0%",
+        });
+        e.preventDefault();
+      } else if (atBottom() && delta < 0) {
+        const damped = -delta * DAMPING;
+        const excess = Math.max(0, damped - MAX_STRETCH_PX);
+        const yRaw =
+          damped <= MAX_STRETCH_PX
+            ? damped
+            : MAX_STRETCH_PX + excess * OVERSTRETCH_FACTOR;
+        const y = -Math.min(yRaw, MAX_TOTAL_STRETCH_PX);
+        const deform = Math.min(excess * DEFORM_SENSITIVITY, MAX_DEFORM);
+        gsap.set(capsule, {
+          y,
+          scaleY: 1 + deform,
+          transformOrigin: "50% 100%",
+        });
+        e.preventDefault();
+      }
+    },
+    { passive: false },
+  );
 
-  document.addEventListener("touchend", () => {
-    gsap.to(capsule, {
-      y: 0,
-      scaleY: 1,
-      duration: 0.4,
-      ease: "back.out",
-      onComplete: () => gsap.set(capsule, { clearProps: "transformOrigin" }),
-    });
-  }, { passive: true });
+  document.addEventListener(
+    "touchend",
+    () => {
+      gsap.to(capsule, {
+        y: 0,
+        scaleY: 1,
+        duration: 0.4,
+        ease: "back.out",
+        onComplete: () => gsap.set(capsule, { clearProps: "transformOrigin" }),
+      });
+    },
+    { passive: true },
+  );
 }
 initCapsuleOverscroll();
 
@@ -134,7 +265,9 @@ function type() {
   }
   setTimeout(type, deleting ? 55 : 88);
 }
-setTimeout(type, 1400);
+function startTyping() {
+  setTimeout(type, 400);
+}
 
 /* ─────────────── SKILLS PROGRESS BARS ─────────────── */
 let skillsDone = false;
@@ -208,20 +341,42 @@ function switchPanel(id) {
             const tl = gsap.timeline({
               onComplete() {
                 if (id === "skills") animateSkills();
+                if (
+                  id === "contact" &&
+                  typeof updateResumenPaquete === "function"
+                )
+                  updateResumenPaquete();
               },
             });
-            tl.to(inEl, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" });
+            tl.to(inEl, {
+              opacity: 1,
+              y: 0,
+              duration: 0.32,
+              ease: "power3.out",
+            });
             if (headers.length) {
               tl.to(
                 headers,
-                { opacity: 1, y: 0, duration: 0.38, stagger: 0.08, ease: "power3.out" },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.38,
+                  stagger: 0.08,
+                  ease: "power3.out",
+                },
                 "-=0.2",
               );
             }
             if (cards.length) {
               tl.to(
                 cards,
-                { opacity: 1, y: 0, duration: 0.32, stagger: 0.07, ease: "power2.out" },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.32,
+                  stagger: 0.07,
+                  ease: "power2.out",
+                },
                 "-=0.15",
               );
             }
@@ -254,10 +409,13 @@ function switchPanel(id) {
           sidebarVisibleMobile = true;
         },
       });
-      tl.to(
-        "#sidebar > *",
-        { opacity: 1, y: 0, duration: 0.45, stagger: 0.07, ease: "power3.out" },
-      );
+      tl.to("#sidebar > *", {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        stagger: 0.07,
+        ease: "power3.out",
+      });
       tl.to(
         "#home > *",
         { opacity: 1, y: 0, duration: 0.45, stagger: 0.09, ease: "power3.out" },
@@ -284,6 +442,8 @@ function switchPanel(id) {
     const tl = gsap.timeline({
       onComplete() {
         if (id === "skills") animateSkills();
+        if (id === "contact" && typeof updateResumenPaquete === "function")
+          updateResumenPaquete();
       },
     });
 
@@ -335,6 +495,8 @@ function switchPanel(id) {
       const tl = gsap.timeline({
         onComplete() {
           if (id === "skills") animateSkills();
+          if (id === "contact" && typeof updateResumenPaquete === "function")
+            updateResumenPaquete();
         },
       });
 
@@ -367,6 +529,9 @@ function switchPanel(id) {
   navPills.forEach((n) => n.classList.remove("active"));
   document.querySelector(`[data-panel="${id}"]`).classList.add("active");
   current = id;
+
+  if (id === "contact" && typeof updateResumenPaquete === "function")
+    updateResumenPaquete();
 }
 
 navPills.forEach((pill) => {
@@ -417,15 +582,23 @@ function enviarWhatsApp() {
     return;
   }
 
-  let waMsg = `¡Hola Oscar! 👋\n\nMe contacto desde tu portafolio:\n\n`;
-  waMsg += `👤 *Nombre:* ${nombre}\n`;
-  if (email) waMsg += `📧 *Email:* ${email}\n`;
-  if (asunto) waMsg += `📌 *Asunto:* ${asunto}\n`;
-  waMsg += `\n💬 *Mensaje:*\n${mensaje}`;
+  let waMsg = `¡Hola Oscar! \n\nMe contacto desde tu portafolio:\n\n`;
+  if (paqueteSeleccionado) {
+    waMsg += `*Paquete de interés:* ${paqueteSeleccionado.nombre}\n`;
+    waMsg += `*Precio:* ${paqueteSeleccionado.precio}\n`;
+    waMsg += `*Tiempo:* ${paqueteSeleccionado.tiempo}\n`;
+    waMsg += `*Resumen:* ${paqueteSeleccionado.resumen}\n\n`;
+  }
+  waMsg += ` *Nombre:* ${nombre}\n`;
+  if (email) waMsg += ` *Email:* ${email}\n`;
+  if (asunto) waMsg += ` *Asunto:* ${asunto}\n`;
+  waMsg += `\n *Mensaje:*\n${mensaje}`;
 
   const encoded = encodeURIComponent(waMsg);
   const waURL = `https://wa.me/522228791843?text=${encoded}`;
   window.open(waURL, "_blank", "noopener,noreferrer");
+  paqueteSeleccionado = null;
+  if (typeof updateResumenPaquete === "function") updateResumenPaquete();
 }
 
 /* ─────────────── GSAP ENTRADA ─────────────── */
@@ -436,7 +609,10 @@ function enviarWhatsApp() {
     gsap.set("#home > *", { opacity: 0, y: 16 });
 
     function runMobileAnim() {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        onComplete: startTyping,
+      });
       tl.to("#capsule", {
         opacity: 1,
         y: 0,
@@ -450,7 +626,7 @@ function enviarWhatsApp() {
       );
       tl.to(
         "#home > *",
-        { opacity: 1, y: 0, duration: 0.45, stagger: 0.09 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 },
         "-=0.25",
       );
     }
@@ -465,7 +641,10 @@ function enviarWhatsApp() {
   gsap.set("#home > *", { opacity: 0, y: 22 });
 
   function runInitAnim() {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      onComplete: startTyping,
+    });
     tl.to("#capsule", {
       opacity: 1,
       scale: 1,
@@ -480,7 +659,7 @@ function enviarWhatsApp() {
     );
     tl.to(
       "#home > *",
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
+      { opacity: 1, y: 0, duration: 0.55, stagger: 0.14 },
       "-=0.35",
     );
   }
