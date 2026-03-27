@@ -39,6 +39,26 @@
   font-size: 0.60rem; padding: 2px 7px;
   border-radius: 5px; font-family: var(--font-c);
 }
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(76,175,80,0.2);
+  background: rgba(76,175,80,0.08);
+  color: var(--green-light);
+  font-size: 0.68rem;
+  text-decoration: none;
+  font-family: var(--font-c);
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+.project-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(76,175,80,0.35);
+  background: rgba(76,175,80,0.14);
+}
 
 /* ═══════════════════════════════════════
    RESPONSIVE < 920px — PORTFOLIO

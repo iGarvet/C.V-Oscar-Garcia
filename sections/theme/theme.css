@@ -24,5 +24,11 @@
    RESPONSIVE < 920px — THEME
 ═══════════════════════════════════════ */
 @media (max-width: 920px) {
-  .theme-toggle { top: 12px; right: 12px; width: 40px; height: 40px; }
+  .theme-toggle {
+    top: calc(10px + env(safe-area-inset-top));
+    right: 10px;
+    width: 42px;
+    height: 42px;
+  }
+  .theme-toggle:active { transform: scale(0.95); }
 }

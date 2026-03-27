@@ -56,6 +56,7 @@ html, body {
   background: var(--bg-body);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -68,6 +69,7 @@ body {
 
 a { text-decoration: none; color: inherit; }
 button { background: none; border: none; cursor: pointer; font-family: inherit; color: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
 /* ═══════════════════════════════════════
    ATMOSPHERIC ORBS
@@ -179,6 +181,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
   padding: 40px 50px 40px 42px;
   scrollbar-width: thin;
   scrollbar-color: rgba(76,175,80,0.3) transparent;
+  -webkit-overflow-scrolling: touch;
 }
 .panel::-webkit-scrollbar { width: 4px; }
 .panel::-webkit-scrollbar-track { background: transparent; }
@@ -259,7 +262,10 @@ i.fa-solid, i.fa-regular, i.fa-brands { color: #4caf50; }
 ═══════════════════════════════════════ */
 @media (max-width: 920px) {
   html, body { overflow: auto; height: auto; }
-  body { align-items: flex-start; padding: 12px 10px 110px; }
+  body {
+    align-items: flex-start;
+    padding: 12px 10px calc(110px + env(safe-area-inset-bottom));
+  }
 
   .capsule {
     flex-direction: column;
@@ -278,4 +284,18 @@ i.fa-solid, i.fa-regular, i.fa-brands { color: #4caf50; }
     padding: 26px 18px 20px; overflow: visible;
   }
   .panel.active { display: block !important; }
+
+  .orb,
+  .cursor-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

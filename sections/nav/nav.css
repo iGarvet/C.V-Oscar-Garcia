@@ -83,7 +83,7 @@
   .nav-pills {
     right: 50%;
     transform: translateX(50%);
-    bottom: 16px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
     top: auto;
     flex-direction: row;
     gap: 6px;
@@ -92,7 +92,14 @@
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid var(--border-green);
     border-radius: var(--r-pill);
-    padding: 8px 14px;
+    padding: 8px 12px;
+  }
+  .nav-pill {
+    width: 44px;
+    height: 44px;
+  }
+  .nav-pill:active {
+    transform: scale(0.96);
   }
   [data-theme="light"] .nav-pills {
     background: #EFF6EF;

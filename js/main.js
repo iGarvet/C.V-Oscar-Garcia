@@ -1,26 +1,29 @@
 /* ─────────────── UTILS ─────────────── */
 const $ = (id) => document.getElementById(id);
 const isMobile = () => window.innerWidth <= 920;
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 
 /* ─────────────── PAQUETES SERVICIOS (cotización WhatsApp) ─────────────── */
 const PACKETES = {
   basico: {
     nombre: "Paquete Básico",
-    precio: "Desde $6,000 – $8,000 MXN",
+    precio: "Desde $5,000 – $7,000 MXN",
     tiempo: "7-14 días",
     resumen:
-      "Landing 1-3 secciones, responsive, animaciones básicas, formulario + WhatsApp, 1 ronda de revisiones.",
+      "Landing 1-3 secciones, responsive, animaciones básicas (CSS), formulario + WhatsApp, 1 ronda de revisiones.",
   },
   estandar: {
     nombre: "Paquete Estándar",
-    precio: "Desde $12,000 – $18,000 MXN",
+    precio: "Desde $8,000 – $15,000 MXN",
     tiempo: "3-5 semanas",
     resumen:
       "Sitio multi-sección, animaciones GSAP + ScrollTrigger, WhatsApp/Calendly, SEO básico, diseño pixel-perfect, 2 rondas de revisiones.",
   },
   premium: {
     nombre: "Paquete Premium",
-    precio: "Desde $32,000 – $45,000 MXN en adelante",
+    precio: "Desde $17,000 MXN en adelante",
     tiempo: "5-10 semanas o más",
     resumen:
       "Landing de alto impacto o sitio con funcionalidades extras, animaciones complejas, optimización LCP/CLS, integraciones (pagos, APIs, CRM), mantenimiento 1 mes, revisiones ilimitadas.",
@@ -138,14 +141,17 @@ themeBtn.addEventListener("click", () =>
 
 /* ─────────────── CURSOR GLOW ─────────────── */
 const glow = $("cursorGlow");
-document.addEventListener("mousemove", (e) => {
-  glow.style.left = e.clientX + "px";
-  glow.style.top = e.clientY + "px";
-});
+if (glow && !isMobile() && !prefersReducedMotion) {
+  document.addEventListener("mousemove", (e) => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
+}
 
 /* ─────────────── CAPSULE OVERSCROLL STRETCH (solo móvil) ─────────────── */
 function initCapsuleOverscroll() {
-  if (!isMobile()) return;
+  const enableMobileStretch = false;
+  if (!isMobile() || prefersReducedMotion || !enableMobileStretch) return;
   const capsule = $("capsule");
   if (!capsule) return;
   const docEl = document.documentElement;
